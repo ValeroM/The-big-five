@@ -26,7 +26,6 @@ Purpose: To get comfortable with C++11 semantics and the implementations of the 
 #include <sstream>
 #include <string>
 
-namespace teaching_project {
 template<typename Object>
 class Points2 {
 public:
@@ -37,9 +36,6 @@ public:
 
   // One parameter constructor.
   explicit Points2(const std::array<Object, 2>& item) {
-    /*
-    Divided by 2 because item.size() returns the size of the array. Therefore, one coordinate is size 1 for the user but size 2 in the array we use to simulate a sequence.
-    */
     size_ = item.size()/2;
     sequence_ = new std::array<Object, 2>{item};
   }
@@ -50,7 +46,6 @@ public:
 
   /*
   Copy-constructor.
-  For statements such as ClassName ObjectName{ConstructedObjectName}
   Pre-condition: rhs must be a lvalue
   Post-condition: A new object is created such that it is the same as rhs. rhs remains the same.
   (BIG FIVE)
@@ -71,7 +66,6 @@ public:
   /*
   Move-constructor.
   For statement such as ClassName ObjectName = std::move(ConstructedObjectName)
-  Note that I initialize sequence_ first because in C++ members are initialized in the order they appear in the class, not the order I initialize them in the member initializer list.
   Pre-condition: rhs must be a rvalue
   Post-condition: A new object is created such that it is the same as rhs. rhs is now set to nullptr
   (BIG FIVE)
@@ -86,7 +80,7 @@ public:
   For statements such as lhs = rhs where lhs and rhs are already constructed.
   Pre-condition: rhs must be a lvalue
   Post-condition: lhs is created such that it is the same as rhs. rhs remains the same
-  BIG FIVE
+  (BIG FIVE)
   */
   Points2& operator=(const Points2 &rhs) {
     Points2 copy = rhs; //
@@ -111,7 +105,7 @@ public:
 
   /*
   Destructor
-  BIG FIVE
+ (BIG FIVE)
   */
   ~Points2() {
     delete [] sequence_;
@@ -128,21 +122,20 @@ public:
     // Read size of sequence (an integer).
     int size_of_sequence;
     input_stream >> size_of_sequence;
-    // Allocate space for sequence & and sequence points to dynamic array of type std::array<Object, 2>
+    // Allocate space for "sequence" & sequence_ ptr points to dynamic array of type std::array<Object, 2>
     size_ = size_of_sequence;
     sequence_ = new std::array<Object, 2>[size_of_sequence];
     // reads the rest of the input line the user entered
     Object token;
     for (int i = 0 ; input_stream >> token; ++i) {
-      sequence_[i][0] = token; // first elem in first std::array
-      input_stream >> token; // advance string
-      sequence_[i][1] = token; // now 2nd elements of std::array
+      sequence_[i][0] = token; 
+      input_stream >> token;
+      sequence_[i][1] = token; 
     }
   }
 
   /*
   Overloading the << operator.
-  Pre-condition: << and an object (i.e., sequence) [User wishes to see the sequence]
   Post-condition: Prints out the "sequence" in form: (x, y) (x, y) ...
   */
   friend std::ostream& operator<<(std::ostream &out, const Points2 &some_points2) {
@@ -181,7 +174,7 @@ public:
   friend Points2 operator+(const Points2 &c1, const Points2 &c2) {
     Points2<double> result_seq;
     if (c1.size() == c2.size()) {
-      // if same size, allocate space
+      // if same size, allocate space and compute addition
       result_seq.size_ = c2.size();
       result_seq.sequence_ = new std::array<Object, 2>[result_seq.size_];
       for (size_t i = 0; i < result_seq.size(); i++) {
@@ -215,7 +208,7 @@ public:
           result_seq.sequence_[i][0] = c2.sequence_[i][0];
           result_seq.sequence_[i][1] = c2.sequence_[i][1];
         }
-    }
+      }
     return result_seq;
   }
 
@@ -227,5 +220,4 @@ private:
 
 };
 
-}  // namespace teaching_project
 #endif // CSCI_335_HOMEWORK1_POINTS2_H_

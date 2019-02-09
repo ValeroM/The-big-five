@@ -13,6 +13,12 @@ Date of creation: February 2nd, 2019
 Date of completition: February 8th, 2019
 
 Purpose: To get comfortable with C++11 semantics and the implementations of the "Big 5"
+
+To run:
+make clean 
+make all 
+./test_points2
+
 */
 
 #ifndef CSCI335_HOMEWORK1_POINTS2_H_

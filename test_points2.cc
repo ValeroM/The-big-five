@@ -3,6 +3,10 @@ Title: test_points2.cc
 Purpose: To make sure everything implemeneted in points2.h runs without errors.
 Description: Main program with two test functions that test points2.h
 Modifications: none
+To run:
+make clean 
+make all 
+./test_points2
 */
 #include <points2.h>
 

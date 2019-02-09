@@ -5,7 +5,6 @@ File Title: points2.h
 Description: This class implements a "sequence" of coordinates (x, y) using C++11 semantics and the "big 5". (Copy Constructor, Copy Assignment Operator, Move Constructor, Move Assignment Operator and Destructor)
 
 Object member ReadPoints2() is implemented so that the user can input its own "sequence". The user must first enter the size of the "sequence", followed by the coordinates (x, y).
-
 Example: 3 7 4 3 2 1 10
 3 specifies number of points. Points are the pairs:
 (7, 4) (3, 2) and (1, 10).

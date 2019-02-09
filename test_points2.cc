@@ -10,7 +10,6 @@ Modifications: none
 #include <iostream>
 #include <string>
 using namespace std;
-using namespace teaching_project;
 
 // Place stand-alone function in unnamed namespace.
 namespace {
@@ -67,8 +66,7 @@ void TestPart2() {
 
 }  // namespace
 
-int
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
   TestPart1();
   TestPart2();
   return 0;

@@ -177,44 +177,20 @@ public:
   //  @c1: A sequence.
   //  @c2: A second sequence.
   //  @return their sum. If the sequences are not of the same size, append the result with the remaining part of the larger sequence.
-  friend Points2 operator+(const Points2 &c1, const Points2 &c2) {
-    Points2<Object> result_seq;
-    if (c1.size() == c2.size()) {
-      // if same size, allocate space and compute addition
-      result_seq.size_ = c2.size();
-      result_seq.sequence_ = new std::array<Object, 2>[result_seq.size_];
-      for (size_t i = 0; i < result_seq.size(); i++) {
-        result_seq.sequence_[i][0] = c1.sequence_[i][0] + c2.sequence_[i][0];
-        result_seq.sequence_[i][1] = c1.sequence_[i][1] + c2.sequence_[i][1];
-      }
-    }
-    // if c1 is the larger sequence
-    else if (c1.size() > c2.size()) {
-      result_seq.size_ = c1.size();
-      result_seq.sequence_ = new std::array<Object, 2>[result_seq.size_];
-      for (size_t i = 0; i < c2.size(); i++) {
-        result_seq.sequence_[i][0] = c1.sequence_[i][0] + c2.sequence_[i][0];
-        result_seq.sequence_[i][1] = c1.sequence_[i][1] + c2.sequence_[i][1];
-      }
-      // appending the result with the remaining part of the larger sequence (c1).
-      for (size_t i = c2.size(); i < result_seq.size_; i++) {
-        result_seq.sequence_[i][0] = c1.sequence_[i][0];
-        result_seq.sequence_[i][1] = c1.sequence_[i][1];
-      }
+   friend Points2 operator+(const Points2 &c1, const Points2 &c2) {
+   Points2<Object> result_seq;
+   // if c1 is the greater one
+   if (c1.size_ > c2.size_) {
+      result_seq.size_ = c1.size_;
+      result_seq.sequence_ = new std::array<Object, 2> [result_seq.size_];
     } else {
-        // c2 is the larger sequence
-        result_seq.size_ = c2.size();
-        result_seq.sequence_ = new std::array<Object, 2>[result_seq.size_];
-        for (size_t i = 0; i < c1.size(); i++) {
-          result_seq.sequence_[i][0] = c1.sequence_[i][0] + c2.sequence_[i][0];
-          result_seq.sequence_[i][1] = c1.sequence_[i][1] + c2.sequence_[i][1];
-        }
-        // appending the result with the remaining part of the larger sequence (c2).
-        for (size_t i = c1.size(); i < result_seq.size_; i++) {
-          result_seq.sequence_[i][0] = c2.sequence_[i][0];
-          result_seq.sequence_[i][1] = c2.sequence_[i][1];
-        }
+        result_seq.size_ = c2.size_;   // c2 is greater or equal
+        result_seq.sequence_ = new std::array<Object, 2> [result_seq.size_];
       }
+    for (size_t i = 0; i < result_seq.size_; i++) {
+      result_seq.sequence_[i][0] = c1.sequence_[i][0] + c2.sequence_[i][0];
+      result_seq.sequence_[i][1] = c1.sequence_[i][1] + c2.sequence_[i][1];
+    }
     return result_seq;
   }
 

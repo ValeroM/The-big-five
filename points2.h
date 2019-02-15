@@ -11,13 +11,13 @@ Example: 3 7 4 3 2 1 10
 
 Date of creation: February 2nd, 2019
 Date of completition: February 8th, 2019
-Date of modifications: February 12th, 2019. 
+Date of modifications: February 12th, 2019.
 
 Purpose: To get comfortable with C++11 semantics and the implementations of the "Big 5"
 
 To run:
-make clean 
-make all 
+make clean
+make all
 ./test_points2
 
 */
@@ -76,7 +76,7 @@ public:
   Post-condition: A new object is created such that it is the same as rhs. rhs is now set to nullptr
   (BIG FIVE)
   */
-  Points2(Points2 &&rhs) : sequence_(std::move(rhs.sequence_)), size_(std::move(rhs.size_)) {
+  Points2(Points2 &&rhs) : sequence_(rhs.sequence_), size_(rhs.size_) {
     rhs.sequence_ = nullptr;
     rhs.size_ = 0;
   }
@@ -98,7 +98,7 @@ public:
   Move-assignment.
   For statements such as ConstructedObjectName = std::move(ConstructedObjectName)
   Pre-condition: rhs must be a rvalue
-  Post-condition: lhs is created such that it is the same as rhs. 
+  Post-condition: lhs is created such that it is the same as rhs.
   (BIG FIVE)
   */
   Points2& operator=(Points2 &&rhs) {
@@ -134,9 +134,9 @@ public:
     // reads the rest of the input line the user entered
     Object token;
     for (int i = 0 ; input_stream >> token; ++i) {
-      sequence_[i][0] = token; 
+      sequence_[i][0] = token;
       input_stream >> token;
-      sequence_[i][1] = token; 
+      sequence_[i][1] = token;
     }
   }
 
